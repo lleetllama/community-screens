@@ -1,0 +1,15 @@
+services:
+  dashboard:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      SECRET_KEY: "${SECRET_KEY:?Set SECRET_KEY in .env}"
+      ADMIN_PASSWORD: "${ADMIN_PASSWORD:?Set ADMIN_PASSWORD in .env}"
+      TZ: "${TZ:-America/New_York}"
+      DATA_DIR: /app/data
+    volumes:
+      - dashboard_data:/app/data
+    restart: unless-stopped
+volumes:
+  dashboard_data:
